@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+  <h1>Rock, Paper, Scissors Game</h1>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+  <p id="result"></p>
+
+  <script>
+    const choices = ['rock', 'paper', 'scissors'];
+
+    // Function to generate a random computer choice
+    function computerPlay() {
+      const randomIndex = Math.floor(Math.random() * choices.length);
+      return choices[randomIndex];
+    }
+
+    // Function to play a round of the game
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toLowerCase();
+      if (!choices.includes(playerSelection)) {
+        return 'Invalid choice. Please choose Rock, Paper, or Scissors.';
+      }
+
+      if (playerSelection === computerSelection) {
+        return 'It\'s a tie!';
+      }
+
+      if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+      ) {
+        return 'You win!';
+      }
+
+      return 'Computer wins!';
+    }
+
+    // Function to update the result message
+    function updateResultMessage(message) {
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = message;
+    }
+
+    // Event listeners for player choices
+    document.getElementById('rock').addEventListener('click', () => {
+      const computerSelection = computerPlay();
+      const result = playRound('rock', computerSelection);
+      updateResultMessage(`You chose Rock. Computer chose ${computerSelection}. ${result}`);
+    });
+
+    document.getElementById('paper').addEventListener('click', () => {
+      const computerSelection = computerPlay();
+      const result = playRound('paper', computerSelection);
+      updateResultMessage(`You chose Paper. Computer chose ${computerSelection}. ${result}`);
+    });
+
+    document.getElementById('scissors').addEventListener('click', () => {
+      const computerSelection = computerPlay();
+      const result = playRound('scissors', computerSelection);
+      updateResultMessage(`You chose Scissors. Computer chose ${computerSelection}. ${result}`);
+    });
+  </script>
+</body>
+</html>
